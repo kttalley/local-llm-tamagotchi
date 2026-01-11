@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/projects/llm-tamagotchi/',
+  base: '/projects/llm-tomagatchi/',
   server: {
     port: 3000,
     open: true,
