@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* Custom Pixel Art Styles */
+@layer base {
+  :root {
+    /* LCD Color Palette - authentic 90s Tamagotchi colors */
+    --lcd-bg: #9bbc0f;
+    --lcd-light: #8bac0f;
+    --lcd-dark: #306230;
+    --lcd-darkest: #0f380f;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  /* Pixel-perfect rendering for sprites */
+  .pixel-art {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  /* LCD Screen Effect */
+  .lcd-screen {
+    background-color: var(--lcd-bg);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+    box-shadow:
+      inset 0 0 20px rgba(0, 0, 0, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+
+  /* Scanline overlay effect */
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Retro button style */
+  .retro-btn {
+    background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 100%);
+    border: 2px solid #606060;
+    border-radius: 4px;
+    box-shadow:
+      inset 1px 1px 0 #ffffff,
+      inset -1px -1px 0 #808080,
+      2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  .retro-btn:active {
+    transform: translateY(1px);
+    box-shadow:
+      inset 1px 1px 0 #808080,
+      inset -1px -1px 0 #ffffff,
+      1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Pixel-style progress bar */
+  .pixel-bar {
+    height: 8px;
+    background: var(--lcd-darkest);
+    border: 2px solid var(--lcd-dark);
+  }
+
+  .pixel-bar-fill {
+    height: 100%;
+    background: var(--lcd-light);
+    transition: width 0.3s ease;
+  }
+
+  /* Widget container */
+  .tamagotchi-shell {
+    background: linear-gradient(180deg, #d4d4d8 0%, #a1a1aa 50%, #71717a 100%);
+    border: 3px solid #52525b;
+    border-radius: 24px;
+    box-shadow:
+      inset 2px 2px 0 #e4e4e7,
+      inset -2px -2px 0 #52525b,
+      4px 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Sprite animation keyframes */
+@keyframes idle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes blink {
+  0%, 90%, 100% { opacity: 1; }
+  95% { opacity: 0; }
+}
+
+.pet-idle {
+  animation: idle-bounce 1s ease-in-out infinite;
+}
+
+.pet-blink {
+  animation: blink 3s ease-in-out infinite;
+}
