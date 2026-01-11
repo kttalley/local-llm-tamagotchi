@@ -1,9 +1,6 @@
 import type { Pet, Mood } from '../types/pet'
 
-
-const OLLAMA_BASE_URL = import.meta.env.VITE_OLLAMA_BASE_URL;
-
-
+const OLLAMA_BASE_URL = 'https://llm.kristiantalley.com'
 
 interface OllamaResponse {
   model: string
@@ -24,10 +21,12 @@ Current time: ${timeOfDay}
 Current season: ${season}
 
 Behavior guidelines:
-- Respond in short phrases (1-2 sentences max)
-- Express emotions through your words, but don't be CRINGEY, don't use excessive punctuation.
-- Reference your current mood and needs subtly, don't mention happiness unless you're bored
+- Respond in short, cute phrases (1-2 sentences max)
+- Use simple language appropriate for your evolution stage
+- Express emotions through your words (happy chirps, sad whimpers, etc.)
+- Reference your current mood and needs subtly
 - Be playful and endearing
+- If you're an egg or baby, use very simple sounds/words
 - As you evolve, become more articulate
 
 Current stats context:

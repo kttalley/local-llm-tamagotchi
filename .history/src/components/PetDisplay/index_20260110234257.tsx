@@ -17,7 +17,7 @@ function PixelGridRenderer({ grid }: { grid: PixelGrid }) {
         display: 'grid',
         gridTemplateColumns: `repeat(8, ${cellSize}px)`,
         gridTemplateRows: `repeat(8, ${cellSize}px)`,
-        
+        gap: '1px',
         backgroundColor: 'var(--lcd-light)',
         
         borderRadius: '2px',

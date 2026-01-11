@@ -10,7 +10,8 @@ export function FloatingButton({ onClick, isOpen }: FloatingButtonProps) {
       className={`
         fixed bottom-6 right-6 z-50
         w-16 h-16 rounded-full
-        bg-gradient-to-br from-pink-300 to-purple-400
+        
+        bg-[--lcd-bg]
         shadow-lg shadow-purple-500/30
         flex items-center justify-center
         transition-all duration-300 ease-out

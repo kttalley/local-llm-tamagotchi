@@ -8,21 +8,16 @@ interface PetDisplayProps {
 
 // Renders an 8x8 pixel grid
 function PixelGridRenderer({ grid }: { grid: PixelGrid }) {
-  const cellSize = 10  // pixels per cell
+  const cellSize = 8  // pixels per cell
 
   return (
     <div
       className="pixel-art"
       style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(8, ${cellSize}px)`,
-        gridTemplateRows: `repeat(8, ${cellSize}px)`,
-        
-        backgroundColor: 'var(--lcd-light)',
-        
-        borderRadius: '2px',
-        outline: 'none'
-      }}
+    display: 'grid',
+    gridTemplateColumns: `repeat(8, ${cellSize}px)`,
+    gridTemplateRows: `repeat(8, ${cellSize}px)`
+  }}
     >
       {grid.map((row, rowIdx) =>
         row.map((cell, colIdx) => (

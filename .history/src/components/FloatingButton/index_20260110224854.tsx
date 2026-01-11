@@ -10,13 +10,13 @@ export function FloatingButton({ onClick, isOpen }: FloatingButtonProps) {
       className={`
         fixed bottom-6 right-6 z-50
         w-16 h-16 rounded-full
-        bg-gradient-to-br from-pink-300 to-purple-400
+        bg-gradient-to-br from-pink-400 to-purple-500
         shadow-lg shadow-purple-500/30
         flex items-center justify-center
         transition-all duration-300 ease-out
         hover:scale-110 hover:shadow-xl hover:shadow-purple-500/40
         active:scale-95
-        ${isOpen ? 'rotate-90' : 'rotate-0'}
+        ${isOpen ? 'rotate-45' : 'rotate-0'}
       `}
       aria-label={isOpen ? 'Close Tamagotchi' : 'Open Tamagotchi'}
     >
@@ -38,7 +38,7 @@ export function FloatingButton({ onClick, isOpen }: FloatingButtonProps) {
           // Egg icon when closed
           <>
             <ellipse cx="16" cy="18" rx="10" ry="12" fill="white" />
-            <ellipse cx="16" cy="18" rx="8" ry="10" fill="#dcf428" />
+            <ellipse cx="16" cy="18" rx="8" ry="10" fill="#fcd34d" />
             <circle cx="12" cy="16" r="2" fill="#1f2937" />
             <circle cx="20" cy="16" r="2" fill="#1f2937" />
             <path

@@ -21,9 +21,9 @@ export function ChatBubble({ message }: ChatBubbleProps) {
       {/* Speech bubble tail */}
       <div
         className="
-          absolute -bottom-2 ml-[50%]
+          absolute -bottom-1 center-0
           w-0 h-0
-          border-t-8 border-t-[var(--lcd-dark)]
+          border-t-8 border-t-[var(--lcd-darkest)]
           border-r-8 border-r-transparent
         "
       />
