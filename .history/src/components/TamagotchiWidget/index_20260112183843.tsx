@@ -56,7 +56,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
     >
       {/* Header */}
       <div className="px-4 py-3 border-b-2 border-zinc-500/50">
-        <div className="flex items-center justify-between">
+        <div className="flex items-end justify-between">
           <h2 className="text-sm font-bold text-zinc-800 uppercase tracking-wider">
             {pet ? pet.name : 'Tamagotchi'}
           </h2>
@@ -69,7 +69,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
       </div>
 
       {/* LCD Screen */}
-      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[200px] transition-all duration-320">
+      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[320px]">
         <div className="scanlines">
           {!pet ? (
             // Create Pet Form
@@ -101,7 +101,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
             </form>
           ) : (
             // Pet Display
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 ">
               {/* Chat bubble */}
               {showChat && lastMessage?.role === 'pet' && (
                 <ChatBubble message={lastMessage.content} />

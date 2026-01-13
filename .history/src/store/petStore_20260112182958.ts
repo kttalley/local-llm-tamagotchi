@@ -85,7 +85,7 @@ export const usePetStore = create<PetStore>()(
   persist(
     (set, get) => ({
       pet: null,
-      isWidgetOpen: true,
+      isWidgetOpen: false,
       currentAction: 'idle',
       chatHistory: [],
       isLoading: false,
@@ -97,7 +97,7 @@ export const usePetStore = create<PetStore>()(
           id: generateId(),
           name,
           birthDate: Date.now(),
-          evolutionStage: 'egg',
+          evolutionStage: 'adult',
           stats: {
             hunger: 80,
             happiness: 80,

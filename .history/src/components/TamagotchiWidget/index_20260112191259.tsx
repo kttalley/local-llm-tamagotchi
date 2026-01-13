@@ -63,6 +63,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
           {pet && (
             <span className="text-xs text-zinc-600 uppercase">
               {pet.evolutionStage}
+              <button>hello</button>
             </span>
           )}
         </div>

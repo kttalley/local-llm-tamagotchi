@@ -15,6 +15,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
   const [petName, setPetName] = useState('')
   const [showChat, setShowChat] = useState(false)
 
+  
   // Tick stats every minute
   useEffect(() => {
     if (!pet) return
@@ -69,7 +70,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
       </div>
 
       {/* LCD Screen */}
-      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[200px] transition-all duration-320">
+      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[304px] transition-all duration-320 ease-in-out">
         <div className="scanlines">
           {!pet ? (
             // Create Pet Form
@@ -103,11 +104,24 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
             // Pet Display
             <div className="flex flex-col items-center gap-2">
               {/* Chat bubble */}
-              {showChat && lastMessage?.role === 'pet' && (
-                <ChatBubble message={lastMessage.content} />
-              )}
+              
+              <div
+  className={`
+    overflow-hidden
+    transition-all duration-300 ease-out
+    ${showChat && lastMessage?.role === 'pet'
+      ? 'max-h-28 opacity-100 translate-y-0'
+      : 'max-h-0 opacity-0 -translate-y-1'}
+  `}
+>
+  {showChat && lastMessage?.role === 'pet' && (
+    <ChatBubble message={lastMessage.content} />
+  )}
+</div>
+              
 
               {/* Pet sprite */}
+              
               <PetDisplay
                 pixelGrid={pet.pixelGrid}
                 isSleeping={pet.isSleeping}
@@ -115,6 +129,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
 
               {/* Stats */}
               <StatsBar stats={pet.stats} />
+              
             </div>
           )}
         </div>

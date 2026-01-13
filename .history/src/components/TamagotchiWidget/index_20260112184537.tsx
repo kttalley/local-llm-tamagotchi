@@ -69,7 +69,7 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
       </div>
 
       {/* LCD Screen */}
-      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[200px] transition-all duration-320">
+      <div className="m-3 p-4 lcd-screen relative overflow-hidden min-h-[320px]">
         <div className="scanlines">
           {!pet ? (
             // Create Pet Form
@@ -101,21 +101,23 @@ export function TamagotchiWidget({ isOpen }: TamagotchiWidgetProps) {
             </form>
           ) : (
             // Pet Display
-            <div className="flex flex-col items-center gap-2">
-              {/* Chat bubble */}
-              {showChat && lastMessage?.role === 'pet' && (
-                <ChatBubble message={lastMessage.content} />
-              )}
+            <div className="relative w-full h-full">
+  {/* Floating chat bubble */}
+  {showChat && lastMessage?.role === 'pet' && (
+    <div className="absolute top-2 left-2 right-2 z-20">
+      <ChatBubble message={lastMessage.content} />
+    </div>
+  )}
 
-              {/* Pet sprite */}
-              <PetDisplay
-                pixelGrid={pet.pixelGrid}
-                isSleeping={pet.isSleeping}
-              />
-
-              {/* Stats */}
-              <StatsBar stats={pet.stats} />
-            </div>
+  {/* Anchored pet + stats */}
+  <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-2 pb-2">
+    <PetDisplay
+      pixelGrid={pet.pixelGrid}
+      isSleeping={pet.isSleeping}
+    />
+    <StatsBar stats={pet.stats} />
+  </div>
+</div>
           )}
         </div>
       </div>

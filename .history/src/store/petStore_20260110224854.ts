@@ -85,7 +85,7 @@ export const usePetStore = create<PetStore>()(
   persist(
     (set, get) => ({
       pet: null,
-      isWidgetOpen: true,
+      isWidgetOpen: false,
       currentAction: 'idle',
       chatHistory: [],
       isLoading: false,
