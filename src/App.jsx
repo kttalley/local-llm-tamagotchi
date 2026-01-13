@@ -3,7 +3,12 @@ import { TamagotchiWidget } from './components/TamagotchiWidget'
 import { usePetStore } from './store/petStore'
 
 function App() {
-  const { isWidgetOpen, toggleWidget } = usePetStore()
+  const { isWidgetOpen, toggleWidget, chatHistory, pet } = usePetStore()
+
+  // Get the last pet message for the floating button preview
+  const lastPetMessage = chatHistory
+    .filter(msg => msg.role === 'pet')
+    .slice(-1)[0]?.content
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
@@ -15,7 +20,12 @@ function App() {
 
       {/* Floating Tamagotchi Widget */}
       <TamagotchiWidget isOpen={isWidgetOpen} onClose={toggleWidget} />
-      <FloatingButton onClick={toggleWidget} isOpen={isWidgetOpen} />
+      <FloatingButton
+        onClick={toggleWidget}
+        isOpen={isWidgetOpen}
+        message={lastPetMessage}
+        pixelGrid={pet?.pixelGrid}
+      />
     </div>
   )
 }

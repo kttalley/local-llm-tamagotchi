@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 
-// Mini pixel grid renderer for the floating button (white on transparent)
+// Mini pixel grid renderer for the floating button
 function MiniPixelGrid({ grid }) {
   const cellSize = 4 // smaller cells for the button
 
   return (
     <div
-      className="pixel-art"
+      className="pixel-art rounded-sm overflow-hidden"
       style={{
         display: 'grid',
         gridTemplateColumns: `repeat(8, ${cellSize}px)`,
@@ -20,7 +20,7 @@ function MiniPixelGrid({ grid }) {
             style={{
               width: cellSize,
               height: cellSize,
-              backgroundColor: cell === 1 ? 'white' : 'transparent'
+              backgroundColor: cell === 1 ? '#1f2937' : '#dcf428'
             }}
           />
         ))
