@@ -155,6 +155,66 @@ Current stats context:
 Remember: You are a cute virtual pet, not an AI assistant. Stay in character!`
 }
 
+export async function generateGreetingHaiku(petName) {
+  const temporal = getTemporalContext()
+
+  const haikuPrompt = `Write a single haiku (3 lines: 5-7-5 syllables) as a greeting from a newly hatched virtual pet named ${petName}.
+
+Context for the haiku:
+- Current time: ${temporal.timeOfDay} on ${temporal.dayOfWeek}
+- Season: ${temporal.season}
+- Monthly theme: ${temporal.monthlyTheme}
+${temporal.specialDay ? `- Special day: ${temporal.specialDay}` : ''}
+
+The haiku should:
+- Be a warm, playful greeting to the user
+- Subtly reference the time of day, season, or current vibes
+- Feel like it's coming from a cute, newly born creature
+- Be exactly 3 lines with no additional text or explanation
+
+Just output the haiku, nothing else.`
+
+  try {
+    const response = await fetch(`${OLLAMA_BASE_URL}/api/generate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gemma3:latest',
+        prompt: haikuPrompt,
+        stream: false,
+        options: {
+          temperature: 0.9,
+          top_p: 0.95,
+          num_predict: 50
+        }
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error(`Ollama API error: ${response.status}`)
+    }
+
+    const data = await response.json()
+    return data.response.trim() || getDefaultHaiku(temporal)
+  } catch (error) {
+    console.error('Ollama greeting error:', error)
+    return getDefaultHaiku(temporal)
+  }
+}
+
+function getDefaultHaiku(temporal) {
+  // Fallback haikus based on time of day
+  const haikus = {
+    morning: "Sun peeks through the clouds\nA new friend awakens now\nHello, let's play!",
+    afternoon: "Warm light fills the sky\nI hatched just to meet you here\nWhat shall we do?",
+    evening: "Stars begin to wake\nI'm so glad that you are here\nLet's be good friends!",
+    night: "Moon glows soft above\nEven now I found my way\nTo say hi to you"
+  }
+  return haikus[temporal.timeOfDay] || haikus.afternoon
+}
+
 export async function sendChatMessage(userMessage, pet, mood) {
   const systemPrompt = buildSystemPrompt(pet, mood)
 

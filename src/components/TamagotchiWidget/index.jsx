@@ -4,9 +4,10 @@ import { PetDisplay } from '../PetDisplay'
 import { StatsBar } from '../StatsBar'
 import { ActionButtons } from '../ActionButtons'
 import { ChatBubble } from '../ChatBubble'
+import { generateGreetingHaiku } from '../../services/ollama'
 
 export function TamagotchiWidget({ isOpen, onClose }) {
-  const { pet, createPet, tickStats, chatHistory } = usePetStore()
+  const { pet, createPet, tickStats, chatHistory, addChatMessage, setLoading, isLoading } = usePetStore()
 
   // Tick stats every minute
   useEffect(() => {
@@ -26,12 +27,28 @@ export function TamagotchiWidget({ isOpen, onClose }) {
     }
   }, [])
 
-  const handleCreatePet = (e) => {
+  const handleCreatePet = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const petName = formData.get('petName')
     if (petName && petName.trim()) {
-      createPet(petName.trim())
+      const name = petName.trim()
+      createPet(name)
+
+      // Fetch greeting haiku from Ollama
+      setLoading(true)
+      try {
+        const haiku = await generateGreetingHaiku(name)
+        addChatMessage({
+          role: 'pet',
+          content: haiku,
+          timestamp: Date.now()
+        })
+      } catch (error) {
+        console.error('Failed to generate greeting:', error)
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
@@ -97,9 +114,10 @@ export function TamagotchiWidget({ isOpen, onClose }) {
               />
               <button
                 type="submit"
-                className="retro-btn mx-auto"
+                disabled={isLoading}
+                className="retro-btn mx-auto disabled:opacity-50"
               >
-                Hatch!
+                {isLoading ? 'Hatching...' : 'Hatch!'}
               </button>
             </form>
           ) : (
